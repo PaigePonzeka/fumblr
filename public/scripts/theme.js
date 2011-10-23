@@ -19,8 +19,6 @@ function generateIndex() {
     $(data.response.posts).each(function(index) {
       // get the post type
       var post_type = this.type;
-      // get post url
-      var post_url = this.post_url
       // get post date
       var post_date = this.date
       // get post tags (array)
@@ -31,7 +29,6 @@ function generateIndex() {
 
       var preview_content;
       // process each post depending on type
-      console.log(post_type);
       switch(post_type)
       {
         case "text":
@@ -66,9 +63,11 @@ function generateTextPreview(post)
   var preview_content = "";
   var text_post_title = $('<h3 />', { text: post_title });
   var text_post_body = $('<p />', { text: processText(post_body).substring(0, 300) });
-  preview_container = generatePreviewContainer(preview_content);
 
-  return preview_container.append(text_post_title).append(text_post_body);
+  // turn title into link to post_url
+  var text_post_url = $('<a />', { href: post.post_url});
+  preview_container = generatePreviewContainer(preview_content);
+  return text_post_url.html(preview_container.append(text_post_title).append(text_post_body));
 }
 
 
@@ -78,11 +77,12 @@ function generatePhotoPreview(post)
   var post_caption = post.caption
   var post_photos = post.photos
 
-  post_container = generatePreviewContainer();
   var preview_post_photo = $('<img />', { src: post_photos[0].alt_sizes[0].url });
-  var preview_post_caption = $('<p />', { text: post_caption});
+  var preview_post_caption = $('<p />', { text: post_caption });
 
-  return post_container.append(post_caption).append(preview_post_photo);
+  var preview_post_url = $('<a />', { href: post.post_url });
+  post_container = generatePreviewContainer();
+  return preview_post_url.html(post_container.append(post_caption).append(preview_post_photo));
 }
 
 
@@ -90,11 +90,11 @@ function generatePhotoPreview(post)
 function generateQuotePreview(post)
 {
   var post_text = post.text;
-
   var preview_post_caption = $('<p />', { text: processText(post_text)});
-  post_container = generatePreviewContainer();
 
-  return post_container.append(preview_post_caption);
+  var preview_post_url = $('<a />', { href: post.post_url });
+  post_container = generatePreviewContainer();
+  return preview_post_url.html(post_container.append(preview_post_caption));
 }
 
 
@@ -102,11 +102,10 @@ function generateQuotePreview(post)
 function generateLinkPreview(post)
 {
   var post_description = post.description;
-
-  post_container = generatePreviewContainer();
   var preview_post_description = $('<p />', { text: processText(post_description)});
 
-  return post_container.append(preview_post_description);
+  post_container = generatePreviewContainer();
+  return  preview_post_url.html(post_container.append(preview_post_description));
 }
 
 
