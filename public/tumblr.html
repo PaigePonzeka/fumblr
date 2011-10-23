@@ -751,37 +751,91 @@
     <style type="text/css">{CustomCSS}</style>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.3/jquery.min.js" type="text/javascript"></script>
+    <script src="http://isotope.metafizzy.co/jquery.isotope.min.js" type="text/javascript"></script>
+
     <script src="scripts/theme.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="wrapper">
-        <div id="title">
-            <a href="/">
-                {block:IfHeaderImage}<img src="{image:Header}" />{/block:IfHeaderImage}
-                {block:IfNotHeaderImage}{Title}{/block:IfNotHeaderImage}
-            </a>
-        </div>
-
-        <div id = "content">
-          <div id = "posts_list" >
+      <div id = "side">
+        <div id = "side_avatar" class = "box_color1">
+          <div id = "side_avatar_container">
+            <img src="http://placekitten.com/128/128"><!--{PortraitURL-128} -->
           </div>
-            {block:SearchPage}
-                <div id = "searchresults" class="searchresultcount">{SearchResultCount} results for <strong>"{SearchQuery}"</strong></div>
-            {/block:SearchPage}
+        </div>
+        <div id = "side_about" class = "box_color2">
+          <h3> About Me </h3>
+          <p>{Description}</p>
+        </div>
+        {block:Twitter}
+        <div id = "side_tweets" class = "box_color3">
+          <h3>
+            Follow
+            <a href = "http://twitter.com/#!/{TwitterUsername}" target = "_blank">@{TwitterUsername}</a>
+          </h3>
+          <ul id="tweets">
+            </ul>
+        </div>
+        <script type="text/javascript">
 
-            {block:NoSearchResults}
-                <style type="text/css">
-                    .searchresultcount {
-                        display: none;
-                    }
-                </style>
-                <div id="searchresults">No results for <strong>"{SearchQuery}"</strong></div>
-            {/block:NoSearchResults}
+            function recent_tweets(data) {
+                for (i=0; i<data.length; i++) {
+                  tweet_item = $("<li />");
+                  tweet_item.html(data[i].text);
 
-            {block:Posts}
-                <div class="post">
+                  $("#tweets").append(tweet_item);
+                  /*tweet_item_date =
+                  tweet_item_link = $("<a />", { text: data[i].created_at, href: });
+                  tweet_item.html();
+                    document.getElementById("tweets").innerHTML =
+                        document.getElementById("tweets").innerHTML +
+                        '<a href="http://twitter.com/{TwitterUsername}/status/' +
+                        (data[i].id_str ? data[i].id_str : data[i].id) +
+                        '"><div class="content">' + data[i].text +
+                        '</div></a>';*/
+                }
+            }
+          });
+        </script>
+        {/block:Twitter}
+      </div> <!-- End of Side -->
+      <div id = "content">
+        <h1>
+          <span class = "color1"> Hello, </span>
+          <span class = "color2"> This is </span>
+          <span class = "color3"> {Title}</span>
+        </h1>
 
-                    {block:Photo}
+        <div id = "posts_list" >
+        </div>
+      </div>
+
+      {block:SearchPage}
+          <div id = "searchresults" class="searchresultcount">{SearchResultCount} results for <strong>"{SearchQuery}"</strong></div>
+      {/block:SearchPage}
+
+       {block:NoSearchResults}
+            <style type="text/css">
+                .searchresultcount {
+                    display: none;
+                }
+            </style>
+            <div id="searchresults">No results for <strong>"{SearchQuery}"</strong></div>
+        {/block:NoSearchResults}
+
+        <div class="post">
+        {block:Posts}
+        {/block:Posts}
+
+
+
+
+
+
+
+
+
+                  <!--  {block:Photo}
                         <div class="media">{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}</div>
                         {block:Caption}<div class="copy">{Caption}</div>{/block:Caption}
                     {/block:Photo}
@@ -941,14 +995,7 @@
                 <div id="twitterwrapper" style="display: none">
                     <a href="http://twitter.com/{TwitterUsername}" style="text-decoration: none"><div class="heading" id="twitter">Latest Tweets</div></a>
                     <div id="tweetcontainer"></div>
-                    <script type="text/javascript">
-                        function recent_tweets(data) {
-                            document.getElementById("twitterwrapper").style.display = "block";
-                            for(i = 0; i < data.length; i++) {
-                                document.getElementById("tweetcontainer").innerHTML = document.getElementById("tweetcontainer").innerHTML + '<a href="http://twitter.com/{TwitterUsername}/status/' + data[i].id + '"><div class="content">' + data[i].text + '</div></a>';
-                            }
-                        }
-                    </script>
+
                 </div>
                 {/block:Twitter}
 
@@ -982,26 +1029,11 @@
 
         <div class="clear"></div>
     </div>
-
+    -->
     {block:Twitter}
-        <script type="text/javascript" src="/tweets.js"></script>
+      <script type="text/javascript" src="http://twitterjs.googlecode.com/svn/trunk/src/twitter.min.js"></script>
+        <!--<script type="text/javascript" src="/tweets.js"></script>-->
     {/block:Twitter}
 
-    {block:IfDisqusShortname}
-        <script type="text/javascript">
-            //<![CDATA[
-            (function() {
-                var links = document.getElementsByTagName('a');
-                var query = '?';
-                for(var i = 0; i < links.length; i++) {
-                    if(links[i].href.indexOf('#disqus_thread') >= 0) {
-                        query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
-                    }
-                }
-                document.write('<script charset="utf-8" type="text/javascript" src="http://disqus.com/forums/{text:Disqus Shortname}/get_num_replies.js' + query + '"></' + 'script>');
-            })();
-            //]]>
-        </script>
-    {/block:IfDisqusShortname}
 </body>
 </html>

@@ -1,7 +1,20 @@
 $(document).ready(function() {
-  console.log("Loaded");
   generateIndex();
+
 });
+
+
+$(window).load(function(){
+  intializeIsotope();
+});
+
+function intializeIsotope()
+{
+  $('#posts_list').isotope({
+    itemSelector : '.box'
+  });
+}
+
 
 // HELPER - removes images and titles from text and returns the excerpt
 function processText(text)
@@ -15,8 +28,10 @@ function processText(text)
 function generateIndex() {
   var posts_url = "http://api.tumblr.com/v2/blog/hello.ponzeka.com/posts?api_key=4dxnMh8zezG5fq2OK0vwVhusWboTW4SSA4g3JUgJJ55b1QE7Jz&callback&jsonp=?";
   $.getJSON(posts_url, function(data) {
-    // get the first 10 posts
+    // get the first 15 posts
     $(data.response.posts).each(function(index) {
+      if (index > 15)
+        return;
       // get the post type
       var post_type = this.type;
       // get post date
@@ -32,16 +47,16 @@ function generateIndex() {
       switch(post_type)
       {
         case "text":
-          $('#posts_list').append(generateTextPreview(this));
+          $('#posts_list').append(generateTextPreview(this).addClass('box_color1'));
           break;
         case "photo":
-          $('#posts_list').append(generatePhotoPreview(this));
+          $('#posts_list').append(generatePhotoPreview(this).addClass('box_color2'));
           break;
         case "link":
-          $('#posts_list').append(generateLinkPreview(this));
+          $('#posts_list').append(generateLinkPreview(this).addClass('box_color3'));
           break;
         case "quote":
-          $('#posts_list').append(generateQuotePreview(this));
+          $('#posts_list').append(generateQuotePreview(this).addClass('box_color4'));
           break;
         default:
           console.log("Error: Unsupported Post type: " + post_type);
@@ -54,58 +69,48 @@ function generateIndex() {
 // processes a text preview, takes a post object
 function generateTextPreview(post)
 {
-  // get the post data
-  var post_title = post.title
-  var post_note_count = post.note_count
-  var post_body = post.body
-
   // convert the post data to html
   var preview_content = "";
-  var text_post_title = $('<h3 />', { text: post_title });
-  var text_post_body = $('<p />', { text: processText(post_body).substring(0, 300) });
-
-  // turn title into link to post_url
+  var text_post_title = $('<h3 />', { text: post.title });
+  var text_post_body = $('<p />', { text: processText(post.body).substring(0, 300) });
   var text_post_url = $('<a />', { href: post.post_url});
+
   preview_container = generatePreviewContainer(preview_content);
-  return text_post_url.html(preview_container.append(text_post_title).append(text_post_body));
+  return preview_container.append(text_post_url.html(text_post_title));
 }
 
 
 // process a photo preview, takes a post object
 function generatePhotoPreview(post)
 {
-  var post_caption = post.caption
-  var post_photos = post.photos
-
-  var preview_post_photo = $('<img />', { src: post_photos[0].alt_sizes[0].url });
-  var preview_post_caption = $('<p />', { text: post_caption });
-
+  var preview_post_photo = $('<img />', { src: post.photos[0].alt_sizes[0].url });
+  var preview_post_caption = $('<p />', { text: post.caption });
   var preview_post_url = $('<a />', { href: post.post_url });
+
   post_container = generatePreviewContainer();
-  return preview_post_url.html(post_container.append(post_caption).append(preview_post_photo));
+  return post_container.append(preview_post_url.html(preview_post_photo));
 }
 
 
 // process a quote preview, takes a post object
 function generateQuotePreview(post)
 {
-  var post_text = post.text;
-  var preview_post_caption = $('<p />', { text: processText(post_text)});
-
+  var preview_post_caption = $('<h3 />', { text: processText(post.text)});
   var preview_post_url = $('<a />', { href: post.post_url });
+
   post_container = generatePreviewContainer();
-  return preview_post_url.html(post_container.append(preview_post_caption));
+  return post_container.append( preview_post_url.html(preview_post_caption));
 }
 
 
 // process a link preview, takes a post object
 function generateLinkPreview(post)
 {
-  var post_description = post.description;
-  var preview_post_description = $('<p />', { text: processText(post_description)});
+  var preview_post_description = $('<h3 />', { text: processText(post.title)});
+  var preview_post_url = $('<a />', { href: post.post_url });
 
   post_container = generatePreviewContainer();
-  return  preview_post_url.html(post_container.append(preview_post_description));
+  return post_container.append( preview_post_url.html(preview_post_description));
 }
 
 

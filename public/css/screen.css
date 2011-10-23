@@ -55,8 +55,164 @@ footer, header, hgroup, menu, nav, section {
   display: block;
 }
 
-.box
+/*********************************
+* Color Classes
+**********************************/
+.color1
 {
-  background: #999;
-  margin: 20px 0;
+  color: #ccff00 !important;
 }
+.box_color1
+{
+  border-color: #ccff00 !important;
+}
+
+.color2
+{
+  color: #9900ff !important;
+
+}
+.box_color2
+{
+  border-color: #9900ff !important;
+}
+
+.color3
+{
+  color: #ff00cc !important;
+
+}
+.box_color3
+{
+  border-color: #ff00cc !important;
+}
+
+.color4
+{
+  color: #447BD4 !important;
+
+}
+.box_color4
+{
+  border-color: #447BD4 !important;
+}
+
+
+/*********************************
+* Sidebar
+**********************************/
+#side
+{
+  width: 180px;
+  float: left;
+  padding: 20px;
+}
+#side_avatar
+{
+  height: 128px;
+  margin: 0 auto;
+}
+#side_avatar_container
+{
+  width: 128px;
+  margin: 0 auto;
+}
+#side_about, #side_tweets, #side_avatar
+{
+  margin-top: 20px;
+  padding: 10px;
+  border-left: 3px solid #666;
+  border-right: 3px solid #666;
+}
+#side_about h3
+{
+  color:  #9900ff;
+}
+#side_about p
+{
+  font-size: 12px;
+  margin: 10px;
+}
+
+
+body
+{
+  background: #000 url('../images/bg-sidebar.png');
+  color: #fff;
+  font-family: Arial;
+}
+
+a
+{
+  text-decoration: none;
+  color: #447BD4;
+}
+  a:hover
+  {
+    text-decoration: underline;
+  }
+
+
+#wrapper
+{
+  width: 950px;
+}
+
+  #wrapper #content
+  {
+    width: 520px;
+    padding: 60px 40px;
+    background: url('../images/bg-content.png');
+  }
+
+  #wrapper #content h1
+  {
+    font-size: 50px;
+    text-align: center;
+    padding-bottom: 50px;
+  }
+
+
+#posts_list
+{
+}
+  #posts_list .box
+  {
+    float: left;
+    width: 130px;
+    height: 100px;
+    overflow: hidden;
+    margin: 10px 10px;
+    padding: 0 10px;
+    border-top: 3px solid #666;
+    border-bottom: 3px solid #666;
+    background: rgba(0, 0, 0, 0.5);
+    /*box-shadow: 0px 5px 5px #333;
+    -webkit-box-shadow: 0px 5px 5px #333;
+    -moz-box-shadow: 0px 5px 5px #333;*/
+  }
+    #posts_list .box img
+    {
+      width: 100%;
+    }
+    #posts_list .box h3
+    {
+      font-size: 14px;
+      line-height: 16px;
+      padding-top: 30px;
+      text-align: center;
+    }
+    #posts_list .box a
+    {
+      font-size: 14px;
+      margin-top: 10px;
+
+    }
+    #posts_list .box p
+    {
+      padding-left: 10px;
+      font-size: 12px;
+
+    }
+
+
