@@ -54,9 +54,16 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
   display: block;
 }
+/*********************************
+*    Generic Helper Classes      *
+**********************************/
+.hide
+{
+  display: none !important;
+}
 
 /*********************************
-* Color Classes
+*          Color Classes         *
 **********************************/
 .color1
 {
@@ -134,10 +141,9 @@ footer, header, hgroup, menu, nav, section {
   margin: 10px;
 }
 
-
 body
 {
-  background: #000 url('../images/bg-sidebar.png');
+  background: #000 url('../images/bg-content.png');
   color: #fff;
   font-family: Arial;
 }
@@ -155,21 +161,14 @@ a
 
 #wrapper
 {
-  width: 950px;
+  /*width: 950px;*/
 }
 
-  #wrapper #content
-  {
-    width: 520px;
-    padding: 60px 40px;
-    background: url('../images/bg-content.png');
-  }
-
-  #wrapper #content h1
+  #wrapper h1
   {
     font-size: 50px;
     text-align: center;
-    padding-bottom: 50px;
+    padding: 30px 0;
   }
 
 
@@ -183,7 +182,6 @@ a
     height: 100px;
     overflow: hidden;
     margin: 10px 10px;
-    padding: 0 10px;
     border-top: 3px solid #666;
     border-bottom: 3px solid #666;
     background: rgba(0, 0, 0, 0.5);
@@ -194,6 +192,7 @@ a
     #posts_list .box img
     {
       width: 100%;
+      height: 100%;
     }
     #posts_list .box h3
     {
@@ -206,13 +205,74 @@ a
     {
       font-size: 14px;
       margin-top: 10px;
-
     }
     #posts_list .box p
     {
       padding-left: 10px;
       font-size: 12px;
-
+    }
+    #posts_list .box .titlebar
+    {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background: rgba( 0, 0 ,0, 0.5);
+      font-size: 12px;
+      padding: 5px 0;
+    }
+    #posts_list .box .titlebar p.date
+    {
+      float: left;
+      margin-left: 10px;
+    }
+    #posts_list .box .titlebar p.note
+    {
+      float: right;
+      margin-right: 10px;
     }
 
+/*********************************
+*   Isotope Styles              *
+*********************************/
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope, .isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+          transition-duration: 0s;
+}
 

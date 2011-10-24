@@ -47,7 +47,6 @@
         }
 
         #wrapper {
-            width: 845px;
             margin: 0 auto;
         }
 
@@ -67,7 +66,6 @@
                 }
 
             #wrapper #content {
-                width: 520px;
                 float: left;
             }
 
@@ -794,21 +792,18 @@
                         '"><div class="content">' + data[i].text +
                         '</div></a>';*/
                 }
-            }
-          });
+          }
         </script>
         {/block:Twitter}
       </div> <!-- End of Side -->
-      <div id = "content">
-        <h1>
-          <span class = "color1"> Hello, </span>
-          <span class = "color2"> This is </span>
-          <span class = "color3"> {Title}</span>
-        </h1>
-
+      <h1>
+        <span class = "color1"> Hello, </span>
+        <span class = "color2"> This is </span>
+        <span class = "color3"> {Title}</span>
+      </h1>
         <div id = "posts_list" >
         </div>
-      </div>
+
 
       {block:SearchPage}
           <div id = "searchresults" class="searchresultcount">{SearchResultCount} results for <strong>"{SearchQuery}"</strong></div>
@@ -826,7 +821,6 @@
         <div class="post">
         {block:Posts}
         {/block:Posts}
-
 
 
 
@@ -990,14 +984,6 @@
                 </div>
 
                 <a href="http://www.tumblr.com/follow/{Name}"><div class="heading" id="followontumblr">Follow on Tumblr</div></a>
-
-                {block:Twitter}
-                <div id="twitterwrapper" style="display: none">
-                    <a href="http://twitter.com/{TwitterUsername}" style="text-decoration: none"><div class="heading" id="twitter">Latest Tweets</div></a>
-                    <div id="tweetcontainer"></div>
-
-                </div>
-                {/block:Twitter}
 
                 {block:IfShowPeopleIFollow}
                     {block:Following}
