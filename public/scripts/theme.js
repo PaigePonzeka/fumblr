@@ -16,8 +16,7 @@ $(document).ready(function() {
 
   // filter the boxes when the user clicks a link
   $("#post_filter a").live('click', function(){
-    console.log($(this).attr('href'));
-    filterIsotope($(this).attr('href'));
+    filterIsotope($(this).attr('href').slice(1));
   });
 
 });
@@ -103,10 +102,7 @@ function formatDate(date){
 
 // filter isotope elements
 function filterIsotope(tag_filter) {
-  // remove the #
-  tag_filter = tag_filter.replace('#','.');
-  // Filter posts by tag
-  $('#posts_list').isotope({ filter: tag_filter });
+  $('#posts_list').isotope({ filter: "." + tag_filter });
 }
 
 
