@@ -1,8 +1,14 @@
 $(document).ready(function() {
   generateIndex();
 
-  $('.box').live('hover',function(){
+  $('.box').live('hover', function(){
     $(this).find('.titlebar').toggleClass('hide');
+  });
+
+  $('.box').live('click', function(){
+    $(this).toggleClass('box_large');
+    $('#posts_list').isotope( 'reLayout');
+    false
   });
 
 });
@@ -15,8 +21,18 @@ $(window).load(function(){
 function intializeIsotope()
 {
   $('#posts_list').isotope({
-    itemSelector : '.box'
+    itemSelector : '.box',
+    getSortData : {
+      tag : function( $elem ) {
+        return $elem.attr('data-tags');
+      }
+    }
   });
+
+  // Sorting elements by tag
+  //$('#posts_list').isotope({ sortBy : 'tag' });
+  // Filter posts by tag
+  //$('#posts_list').isotope({ filter: '.photo' });
 
 }
 
@@ -102,7 +118,7 @@ function generateIndex() {
       switch(post_type)
       {
         case "text":
-          $('#posts_list').append(generateTextPreview(this).addClass('box_color1').append(preview_titlebar));
+          $('#posts_list').append(generateTextPreview(this).addClass('box_color1').attr('data-tag',post_type).append(preview_titlebar));
           break;
         case "photo":
           $('#posts_list').append(generatePhotoPreview(this).addClass('box_color2').append(preview_titlebar));
@@ -130,7 +146,7 @@ function generateTextPreview(post)
   var text_post_body = $('<p />', { text: processText(post.body).substring(0, 300) });
   var text_post_url = $('<a />', { href: post.post_url});
 
-  preview_container = generatePreviewContainer(preview_content);
+  preview_container = generatePreviewContainer(post.type);
   return preview_container.append(text_post_url.html(text_post_title));
 }
 
@@ -142,8 +158,8 @@ function generatePhotoPreview(post)
   var preview_post_caption = $('<p />', { text: post.caption });
   var preview_post_url = $('<a />', { href: post.post_url });
 
-  post_container = generatePreviewContainer();
-  return post_container.append(preview_post_url.html(preview_post_photo));
+  post_container = generatePreviewContainer(post.type);
+  return post_container.append(preview_post_photo);
 }
 
 
@@ -153,8 +169,8 @@ function generateQuotePreview(post)
   var preview_post_caption = $('<h3 />', { text: processText(post.text)});
   var preview_post_url = $('<a />', { href: post.post_url });
 
-  post_container = generatePreviewContainer();
-  return post_container.append( preview_post_url.html(preview_post_caption));
+  post_container = generatePreviewContainer(post.type);
+  return post_container.append( preview_post_caption);
 }
 
 
@@ -164,15 +180,17 @@ function generateLinkPreview(post)
   var preview_post_description = $('<h3 />', { text: processText(post.title)});
   var preview_post_url = $('<a />', { href: post.post_url });
 
-  post_container = generatePreviewContainer();
-  return post_container.append( preview_post_url.html(preview_post_description));
+  post_container = generatePreviewContainer(post.type);
+  return post_container.append( preview_post_description);
 }
 
 
 // returns the div to contain the preview boxes on the front page
-function generatePreviewContainer()
+function generatePreviewContainer(type)
 {
-  var post = $('<div />', { class: "box"});
+  var post = $('<div />', { class: "box" });
+  // add class for each tag
+  post.addClass(type);
   return post;
 }
 
