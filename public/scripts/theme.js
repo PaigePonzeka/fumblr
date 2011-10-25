@@ -16,7 +16,7 @@ $(document).ready(function() {
 
   // filter the boxes when the user clicks a link
   $("#post_filter a").live('click', function(){
-    filterIsotope($(this).attr('href').slice(1));
+    filterIsotope($(this).attr('data-filter'));
   });
 
 });
@@ -36,13 +36,9 @@ function intializeIsotope()
       }
     }
   });
-
   // Sorting elements by tag
   //$('#posts_list').isotope({ sortBy : 'tag' });
-
-
 }
-
 
 
 // HELPER - removes images and titles from text and returns the excerpt
@@ -102,7 +98,7 @@ function formatDate(date){
 
 // filter isotope elements
 function filterIsotope(tag_filter) {
-  $('#posts_list').isotope({ filter: "." + tag_filter });
+  $('#posts_list').isotope({ filter: tag_filter });
 }
 
 
@@ -238,7 +234,7 @@ function generateTagsList(post_tags)
       var tag_nospaces = this.replace(/\s+/g,'_');
       var tag_list_item = $("<li/>");
       var tag_list_item_link = $("<a/>", { href: "#" + tag_nospaces}).text("" + this);
-      tag_list_item.html(tag_list_item_link);
+      tag_list_item.html(tag_list_item_link.attr('data-filter', "." + tag_nospaces));
       $('#post_filter').append(tag_list_item);
     }
   });
