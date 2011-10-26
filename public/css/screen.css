@@ -211,6 +211,7 @@ a
     {
       padding-left: 10px;
       font-size: 12px;
+      text-align: center;
     }
     #posts_list .box .titlebar
     {
@@ -218,24 +219,41 @@ a
       bottom: 0;
       width: 100%;
       background: rgba( 0, 0 ,0, 0.5);
-      font-size: 12px;
       padding: 5px 0;
     }
-    #posts_list .box .titlebar p.date
-    {
-      float: left;
-      margin-left: 10px;
-    }
-    #posts_list .box .titlebar p.note
-    {
-      float: right;
-      margin-right: 10px;
-    }
+
+    /* Style for large boxes */
     #posts_list .box_large
     {
       width: 430px;
       height: 350px;
     }
+    #posts_list .box.box_large .titlebar
+    {
+      padding: 10px 0;
+    }
+    #posts_list .box.box_large .titlebar p
+    {
+      font-size: 16px;
+      text-align: center;
+    }
+
+ul#post_filter
+{
+  width: 500px;
+  height: 50px;
+  overflow: hidden;
+}
+#post_filter li
+{
+  float: left;
+  text-transform: capitalize;
+  margin: 0 10px;
+}
+#post_filter li.selected
+{
+  text-decoration: underline;
+}
 
 
 /*********************************

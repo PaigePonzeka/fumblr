@@ -17,6 +17,9 @@ $(document).ready(function() {
   // filter the boxes when the user clicks a link
   $("#post_filter a").live('click', function(){
     filterIsotope($(this).attr('data-filter'));
+    $("#post_filter li").removeClass('selected');
+    $(this).parents('li').addClass('selected');
+
   });
 
 });
@@ -56,16 +59,16 @@ function formatDate(date){
   switch (parseInt(year_month_day[1].replace(/^[0]+/g,"")))
   {
     case 1:
-      month_string = "Jan";
+      month_string = "January";
       break;
     case 2:
-      month_string = "Feb";
+      month_string = "Feburary";
       break;
     case 3:
-      month_string = "Mar";
+      month_string = "March";
       break;
     case 4:
-      month_string = "Apr";
+      month_string = "April";
       break;
     case 5:
       month_string = "May";
@@ -77,22 +80,22 @@ function formatDate(date){
       month_string = "July";
       break;
     case 8:
-      month_string = "Aug";
+      month_string = "August";
       break;
     case 9:
-      month_string = "Sept";
+      month_string = "September";
       break;
     case 10:
-      month_string = "Oct";
+      month_string = "October";
       break;
     case 11:
-      month_string = "Nov";
+      month_string = "November";
       break;
     case 12:
-      month_string = "Dec";
+      month_string = "December";
       break;
   }
-  return month_string + " "+ year_month_day[2];
+  return month_string + " "+ year_month_day[2] + ", " + year_month_day[0];
 }
 
 
@@ -122,7 +125,7 @@ function generateIndex() {
       var preview_titlebar = $('<div />', { class: "titlebar" } );
       var preview_titlebar_date = $('<p />', { text: formatDate(this.date), class: "date"});
       var preview_titlebar_note = $('<p />', { text: this.note_count, class: "note"});
-      preview_titlebar.append(preview_titlebar_date).append(preview_titlebar_note).addClass('hide');
+      preview_titlebar.append(preview_titlebar_date).addClass('hide');
 
       switch(post_type)
       {
@@ -195,12 +198,11 @@ function generateLinkPreview(post)
 
 
 // returns the div to contain the preview boxes on the front page
-function generatePreviewContainer(type)
+function generatePreviewContainer(post_tags)
 {
   var post = $('<div />', { class: "box" });
   // add class for each tag
-  $.each(tags, function(){
-    console.log(tags);
+  $.each(post_tags, function(){
     post.addClass(this.toLowerCase().replace(/\s+/g,'_'));
   });
 
