@@ -759,6 +759,7 @@
         <div id = "side_avatar" class = "box_color1">
           <div id = "side_avatar_container">
             <img src="http://placekitten.com/128/128"><!--{PortraitURL-128} -->
+            <a href = "#"> Follow Me On Tumblr </a>
           </div>
         </div>
         <div id = "side_about" class = "box_color2">
@@ -794,218 +795,121 @@
                 }
           }
         </script>
+        </div>
         {/block:Twitter}
-      </div> <!-- End of Side -->
-      <h1>
-        <span class = "color1"> Hello, </span>
-        <span class = "color2"> This is </span>
-        <span class = "color3"> {Title}</span>
-      </h1>
-        <ul id="post_filter">
-          <li class = "selected"><a href="#" data-filter="*">show all</a></li>
-        </ul>
-        <div id = "posts_list" >
-        </div>
 
+        <h1>
+           <span class = "color1"> Hello, </span>
+           <span class = "color2"> This is </span>
+           <span class = "color3"> {Title}</span>
+         </h1>
+        <ol id = "posts">
+          {block:Posts}
+            {block:Text}
+              <li class = "post text">
+                {block:Title}
+                  <h3><a href="{Permalink}">{Title}</a></h3>
+                {/block:Title}
 
+                {Body}
+              </li>
 
+            {/block:Text}
+          {/block:Posts}
 
+          {block:Photo}
+            <li class = "post photo">
+              <img src = "{PhotoURL-500}" alt= "{PhotoAlt}">
 
+              {block:Caption}
+                <div class = "caption"> {Caption} </div>
+              {/block:Caption}
+            </li>
+          {/block:Photo}
 
+        {block:Photoset}
+            <li class="post photoset">
+                {Photoset-500}
 
+                {block:Caption}
+                    <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </li>
+        {/block:Photoset}
 
+        {block:Quote}
+            <li class="post quote">
+                "{Quote}"
 
-                  <!--  {block:Photo}
-                        <div class="media">{LinkOpenTag}<img src="{PhotoURL-500}" alt="{PhotoAlt}" />{LinkCloseTag}</div>
-                        {block:Caption}<div class="copy">{Caption}</div>{/block:Caption}
-                    {/block:Photo}
+                {block:Source}
+                    <div class="source">{Source}</div>
+                {/block:Source}
+            </li>
+        {/block:Quote}
 
-                    {block:Video}
-                        <div class="media">{Video-500}</div>
-                        {block:Caption}<div class="copy">{Caption}</div>{/block:Caption}
-                    {/block:Video}
+        {block:Link}
+            <li class="post link">
+                <a href="{URL}" class="link" {Target}>{Name}</a>
 
-                    {block:Audio}
-                        {block:IfShowAlbumArtOnAudioPosts}
-                            {block:AlbumArt}
-                                <div class="album_art">
-                                    <img src="{AlbumArtURL}" alt="{block:Artist}{Artist}{/block:Artist}{block:TrackName} - {TrackName}{/block:TrackName}" style="margin-bottom: 10px" />
-                                </div>
-                            {/block:AlbumArt}
-                        {/block:IfShowAlbumArtOnAudioPosts}
+                {block:Description}
+                    <div class="description">{Description}</div>
+                {/block:Description}
+            </li>
+        {/block:Link}
 
-                        <div class="audio">
-                            <div class="player">{AudioPlayerWhite}</div>
-                            <div class="meta">{PlayCountWithLabel}{block:ExternalAudio} &bull; <a href="{ExternalAudioURL}">download</a>{/block:ExternalAudio}</div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="clear"></div>
-                        {block:Caption}<div class="copy">{Caption}</div>{/block:Caption}
-                    {/block:Audio}
+        {block:Chat}
+            <li class="post chat">
+                {block:Title}
+                    <h3><a href="{Permalink}">{Title}</a></h3>
+                {/block:Title}
 
-                    {block:Quote}
-                        <div class="quote {Length}">{Quote}</div>
-                        <div class="copy">
-                            <div class="quotebg">“</div>
-                            {block:Source}
-                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                                    <tr>
-                                        <td valign="top" style="width: 20px">&mdash;</td>
-                                        <td valign="top" class="quote_source">
-                                            {Source}
-                                        </td>
-                                    </tr>
-                                </table>
-                            {/block:Source}
-                        </div>
-                    {/block:Quote}
+                <ul class="chat">
+                    {block:Lines}
+                        <li class="{Alt} user_{UserNumber}">
+                            {block:Label}
+                                <span class="label">{Label}</span>
+                            {/block:Label}
 
-                    {block:Text}
-                        {block:Title}<div class="title">{Title}</div>{/block:Title}
-                        <div class="copy">{Body}</div>
-                    {/block:Text}
+                            {Line}
+                        </li>
+                    {/block:Lines}
+                </ul>
+            </li>
+        {/block:Chat}
 
-                    {block:Answer}
-                        <div class="question">
-                            <div class="nipple"></div>
-                            {Question}
-                        </div>
-                        <div class="asker_container"><img src="{AskerPortraitURL-24}">{Asker}</div>
-                        <div class="copy">{Answer}</div>
-                    {/block:Answer}
+        {block:Video}
+            <li class="post video">
+                {Video-500}
 
-                    {block:Chat}
-                        {block:Title}<div class="title">{Title}</div>{/block:Title}
-                        <div class="chat">
-                            <div class="lines">
-                                {block:Lines}
-                                    <div class="line {Alt}">{block:Label}<strong>{Label}</strong>{/block:Label} {Line}</div>
-                                {/block:Lines}
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                        <div style="height: 10px"></div>
-                    {/block:Chat}
+                {block:Caption}
+                    <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </li>
+        {/block:Video}
 
-                    {block:Link}
-                        <div class="link"><a href="{URL}" {Target}>{Name} &raquo;</a></div>
-                        {block:Description}<div class="copy">{Description}</div>{/block:Description}
-                    {/block:Link}
+        {block:Audio}
+            <li class="post audio">
+                {AudioPlayerBlack}
 
-                    {block:Date}
-                        <a href="{Permalink}">
-                            <div class="footer">
-                                <div class="date">
-                                    {block:Reblog}Reblogged{/block:Reblog}
-                                    {block:NotReblog}Posted{/block:NotReblog}
+                {block:Caption}
+                    <div class="caption">{Caption}</div>
+                {/block:Caption}
+            </li>
+        {/block:Audio}
+    {/block:Posts}
+        </ol>
 
-                                    {TimeAgo}
+        <p id="footer">
+            {block:PreviousPage}
+                <a href="{PreviousPage}">&#171; Previous</a>
+            {/block:PreviousPage}
 
-                                    {block:Reblog}from {ReblogParentName} {block:RebloggedFromReblog}(originally from {ReblogRootName}){/block:RebloggedFromReblog}{/block:Reblog}
-                                    {block:FromBookmarklet}from bookmarklet{/block:FromBookmarklet}
-                                    {block:FromMobile}from mobile{/block:FromMobile}
-                                </div>
-                                <div class="notes">{block:NoteCount}{NoteCountWithLabel}{/block:NoteCount} {block:IfDisqusShortname}{block:NoteCount}&bull;{/block:NoteCount} <a href="{Permalink}#disqus_thread">view comments</a>{/block:IfDisqusShortname}</div>
-                                <div class="clear"></div>
-                            </div>
-                        </a>
-                    {/block:Date}
+            {block:NextPage}
+                <a href="{NextPage}">Next &#187;</a>
+            {/block:NextPage}
 
-                    {block:IfShowTags}
-                        {block:HasTags}<div class="footer"><div class="tags">Tagged: {block:Tags}<a href="{TagURL}">{Tag}</a><span class="tag-commas">, </span>{/block:Tags}.</div></div>{/block:HasTags}
-                    {/block:IfShowTags}
-
-                    {block:PostNotes}<div class="notecontainer">{PostNotes}</div>{/block:PostNotes}
-
-                    {block:IfDisqusShortname}
-                        {block:Permalink}
-                            <div class="notecontainer" style="margin: 20px 0 1px 0; padding: 1px 10px 10px 10px;">
-                                <div id="disqus_thread"></div>
-                                <script type="text/javascript" src="http://disqus.com/forums/{text:Disqus Shortname}/embed.js"></script>
-                                <noscript><a href="http://{text:Disqus Shortname}.disqus.com/?url=ref">View the discussion thread.</a></noscript>
-                            </div>
-                            <div style="text-align: right; margin-top: 5px">
-                                <a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
-                            </div>
-                        {/block:Permalink}
-                    {/block:IfDisqusShortname}
-
-                </div>
-                <div class="bottom"></div>
-            {/block:Posts}
-
-            {block:Pagination}
-                <div id="navigation">
-                    {block:PreviousPage}<a href="{PreviousPage}">&larr; previous page</a>{/block:PreviousPage}
-                    {block:NextPage}<a href="{NextPage}">next page &rarr;</a>{/block:NextPage}
-                </div>
-            {/block:Pagination}
-
-        </div>
-
-        <div id="sidebar">
-            <div id="top">
-                <div id="avatar"><a href="/"><img src="{PortraitURL-128}" /></a></div>
-                <div id="description">{Description}</div>
-
-                {block:HasPages}
-                    <div id="pages">
-                        {block:Pages}<a href="{URL}" class="page">{Label}</a>{/block:Pages}
-                        <div class="clear"></div>
-                    </div>
-                {/block:HasPages}
-
-                <div id="search">
-                    <form action="/search" method="get" id="search-form">
-                        <input type="hidden" name="t" value="{Name}" />
-                        <input type="hidden" name="scope" value="all_of_tumblr" />
-                        <input type="text" name="q" class="query" value="{SearchQuery}" />
-                        <input type="submit" value="Search" class="submit" />
-                        <div class="clear"></div>
-                    </form>
-                </div>
-                <div id="search-scope">
-                    <input type="radio" id="search-scope-me" name="scope" checked onclick="document.getElementById('search-form').action='/search'" /> <label for="search-scope-me" onclick="document.getElementById('search-form').action='/search'">My Blog</label>
-                    <input type="radio" id="search-scope-all" name="scope" onclick="document.getElementById('search-form').action='http://tumblr.com/search'" /> <label for="search-scope-all" onclick="document.getElementById('search-form').action='http://tumblr.com/search'">All of Tumblr</label>
-                </div>
-
-                <a href="http://www.tumblr.com/follow/{Name}"><div class="heading" id="followontumblr">Follow on Tumblr</div></a>
-
-                {block:IfShowPeopleIFollow}
-                    {block:Following}
-                        <div class="heading" id="following">Following</div>
-                        <div class="content" id="following-avatars">
-                            {block:Followed}<a href="{FollowedURL}"><img src="{FollowedPortraitURL-40}" /></a>{/block:Followed}
-                        </div>
-                    {/block:Following}
-                {/block:IfShowPeopleIFollow}
-
-                <div id="buttons">
-                    <div class="row">
-                        <div class="button" id="button-rss"><a href="{RSS}">RSS Feed</a></div>
-                        <div class="button" id="button-random"><a href="/random">Random</a></div>
-                    </div>
-                    <div class="clear"></div>
-                    <div class="row">
-                        <div class="button" id="button-archive"><a href="/archive">Archive</a></div>
-                        <div class="button" id="button-mobile"><a href="/mobile">Mobile</a></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-
-            </div>
-
-            <div id="bottom"></div>
-            <div id="copyright">&copy; {CopyrightYears} <a href="http://www.tumblr.com">Powered by Tumblr</a></div>
-        </div>
-
-        <div class="clear"></div>
-    </div>
-    -->
-    {block:Twitter}
-      <script type="text/javascript" src="http://twitterjs.googlecode.com/svn/trunk/src/twitter.min.js"></script>
-        <!--<script type="text/javascript" src="/tweets.js"></script>-->
-    {/block:Twitter}
+            <a href="/archive">Archive</a>
+        </p>
 
 </body>
 </html>
